@@ -1,0 +1,128 @@
+    @import 'mixins.scss'; //Миксины	
+    @import 'normalize.scss'; // Обнуление стилей браузера
+
+	/* Для импорта из гугла
+	 * &display=swap - Контролирует порядок загрузки шрифтов. 
+	 * (Повышает показатели Google Speed Page)
+     * &subset=cyrillic-ext - для кирилицы
+	 */
+	@import 'fonts.scss';
+    @import 'var.scss';
+
+
+// ------ Настройки размера документа и экранов -------------------------------
+	$min_width: 320; // Минимальная ширина оболочки
+	$max_width: 1280; // Максимальная ширина оболочки
+
+	$container_max_width: 1170; // Маскимальная ширина контейнера
+	$container_padding: 15;
+	// Брейкпоинты:
+	$md1: $container_max_width + 15;
+	$md2: 991.98;
+	$md3: 767.98;
+	$md4: 479.98;
+	$md5: 374.98;
+	$md6: 320;
+// ----- /Настройки размера документа и экранов -----------------------------
+
+
+// ----- Transition: --------------------------------------------------------
+    $transition_time: 0.4s;			$transition_type: ease;
+
+    $transition: $transition_time $transition_type 0s;
+    $transition_delay: $transition_time $transition_type $transition_time;
+// ----- /Transition: --------------------------------------------------------
+
+// ----- Настройки ----------------------------------------------------------
+$smoothScroll: true; // Плавная прокрутка по якорям   
+
+html {
+    font-family: $font_family;
+    font-size: $font_size;
+    @if ($smoothScroll == true) {
+        scroll-behavior: smooth;
+    }@else if ($smoothScroll == false) {
+        scroll-behavior: initial;
+    }
+}
+body {
+    min-width: $min_width + px;
+    color: $font_color;
+	font-size: 1rem;
+    font-weight: 400;
+    position: relative;
+    line-height: 1.5;
+    background-color: #ffffff;
+    touch-action: pan-x pan-y; // Отключает масштабирование на IOS > 13.5
+    
+    &._lock {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: $min_width + px;
+    width: 100%;
+    max-width: $max_width + px;
+    min-height: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px -3px $theme_shadow_color;
+    background-color: #eeeeee;
+}
+.container {
+    max-width: $container_max_width + px;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+    // Сетка брейкпоинтов
+    @media (max-width: $md1+px) {
+        max-width: 970px;
+    }
+    @media (max-width: $md2+px) {
+        max-width: 750px;
+    }
+    @media (max-width: $md3+px) {
+        max-width: none;
+        padding: 0 $container_padding + px;
+    }
+}
+a,a:visited {
+    color: $font_color;
+}
+
+.design-link {
+    position: fixed;
+    display: block;
+    left: 15px;
+    bottom: 15px;
+    opacity: 0.5;
+    transition: opacity $transition;
+}
+.design-link:hover {
+    opacity: 1;
+    transition: opacity $transition;
+}
+// ----- Технические классы -----------------------------------------------
+
+// Запрет выделения текста 
+._no-user-select {
+    -moz-user-select: none;
+  -khtml-user-select: none;
+         user-select: none; 
+}
+
+/* Подключение других файлов*/
+
+    @import 'ui.scss';	/* Элементы интерфейса */
+    @import '_header.scss';
+    @import '_baner.scss';
+    @import '_products.scss';
+    @import '_about.scss';
+    @import '_blog.scss';
+    @import '_recipes.scss';
+    @import 'footer.scss';

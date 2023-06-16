@@ -1,0 +1,173 @@
+// ===== Подключеие шрифтов	=======================================
+@mixin font($font_name, $file_name, $weight, $style) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+		font-weight: #{$weight};
+		font-style: #{$style};
+	}
+}
+
+
+// ===== Адаптивный шрифт =========================================
+	@mixin adaptive-font($pcSize, $mobSize, $maxSize) {
+		$addSize: $pcSize - $mobSize;
+		@if $maxSize==1 {
+			//Только если меньше контейнера
+			font-size: $pcSize + px;
+			@media (max-width: #{$containerMaxWidt + px}) {
+				font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$containerMaxWidt - 320}));
+			}
+		} @else if $maxSize==2 {
+			//Только если больше контейнера
+			font-size: $pcSize + px;
+			@media (min-width: #{$containerMaxWidt + px}) {
+				font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$max_width - 320}));
+			}
+		} @else {
+			//Всегда
+			font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$max_width - 320}));
+		}
+	}
+
+
+// Резиновое свойство от ширины экрана 
+	@mixin res-prop($property, $maxValue) {
+		@media (min-width: #{$max_width + px}) {
+			#{$property}: #{$maxValue + px};
+		}
+		@media (max-width: #{$max_width + px}) {
+			#{$property}: calc((100vw - 320px )* ((#{$maxValue} / #{$max_width / 100}) / 100));
+		}
+	}
+
+
+
+
+
+//Адаптивное свойство
+@mixin adaptiv-value($property, $startSize, $minSize, $type) {
+	$addSize: $startSize - $minSize;
+	@if $type==1 {
+		//Только если меньше враппера
+		#{$property}: $startSize + px;
+		@media (max-width: #{$max_width + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$containerMaxWidt - 320}));
+		}
+	} @else if $type==2 {
+		//Только если больше враппера
+		#{$property}: $startSize + px;
+		@media (min-width: #{$max_width + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$max_width - 320}));
+		}
+	} @else {
+		//Всегда
+		#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$max_width - 320}));
+	}
+}
+
+
+
+// ===== Адаптивный шрифт для PC ==============
+
+@mixin pc-adaptive-fonts($max, $min) {
+	$dif: $max - $min;
+	@media (max-width: $md3 + px) {
+		font-size: $min + px;
+	}
+	@media (min-width: $md3 + px) {
+		font-size: calc(#{$min + px} + (#{$dif / 100} * #{100vw / ($max_width / 100)}));
+	}
+	@media (min-width: $max_width + px) {
+		font-size: #{$max + px};
+	}
+}
+
+// ===== ПК адаптивное свойство =======================
+@mixin pc-adaptive-value($property, $max, $min) {
+	$dif: $max - $min;
+	@media (min-width: $md3 + px) {
+		#{$property}: calc(#{$min + px} + (#{$dif / 100} * ((100vw - #{$md3 + px}) / #{$max_width / 100})) );
+	}
+	@media (min-width: $max_width + px) {
+		#{$property}: $max + px;
+	}
+}
+
+// ===== Мобайл адаптивное свойство =======================
+@mixin mobile-adaptive-value($property, $max, $min) {
+	$dif: $max - $min;
+	@media (max-width: $md4 + px) {
+		#{$property}: calc(#{$min + px} + (#{$dif / 100} * #{100vw / ($max_width / 100)}));
+	}
+	@media (max-width: $md3 + px) {
+		#{$property}: $max + px;
+	}
+}
+
+
+
+
+
+@mixin maxmd3-adaptive-value($property, $max, $min) {
+	$dif: $max - $min;
+	@media (max-width: $md3 + px) {
+		#{$property}: calc(#{$min + px} + (#{$dif / 100} * #{100vw / ($max_width / 100)}));
+	}
+	@media (max-width: $md4 + px) {
+		#{$property}: $max + px;
+	}
+}
+
+
+// ===== Пропорциональная высота ==================== ?
+@mixin adaptive-height-on-mobile($coef) {
+	@media (max-width: $md3 + px) {
+		height: calc( (100vw - #{$containerPadding + px}) / #{$coef});
+	}
+}
+
+
+// ===== Line Height ==================================================
+@mixin line-height($fontSize, $lineHeight) {
+	line-height: calc(#{$lineHeight} / #{$fontSize});
+}
+// ====================================================================
+
+
+
+
+
+
+// ===== Миксины между рамерами экранов ===============================
+
+@mixin max-md3($property, $max, $min) {
+	$dif: $max - $min;
+	@media (max-width: $md3 + px) {
+		#{$property}: calc(#{$min + px} + (#{$dif / 100} * #{100vw / ($max_width / 100)}));
+	}
+	@media (max-width: $md6 + px) {
+		#{$property}: $min + px;
+	}
+}
+
+@mixin max-md3-min-md4($property, $max, $min) {
+	$maxmd: $md3;
+	$minmd: $md4;
+	$dif: $max - $min;
+	$difProc: $md3 - $md4;
+	@media (max-width: $maxmd + px) and (min-width: $minmd + px) {
+		#{$property}: calc( #{$min + px} + (#{$dif} * (100vw - #{$minmd + px}) / #{$difProc}) );
+	}
+}
+@mixin max-md3-min-md6($property, $max, $min) {
+	$maxmd: $md3;
+	$minmd: $md6;
+	$dif: $max - $min;
+	$difProc: $maxmd - $minmd;
+	@media (max-width: $maxmd + px) and (min-width: $minmd + px) {
+
+		#{$property}: calc( #{$min + px} + (#{$dif} * (100vw - #{$minmd + px}) / #{$difProc}) );
+	}
+}

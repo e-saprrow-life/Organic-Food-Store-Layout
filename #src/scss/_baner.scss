@@ -1,0 +1,62 @@
+.baner {
+    min-height: 400px;
+    height: 100vh;
+    max-height: 600px;
+    background-image: url('../img/baner.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    line-height: 1;
+    color: #ffffff;
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#9c9c42+0,9c9c42+100&1+0,0.2+100 */
+        background: -moz-linear-gradient(left,  rgba(156,156,66,1) 0%, rgba(156,156,66,0.2) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left,  rgba(156,156,66,1) 0%,rgba(156,156,66,0.2) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right,  rgba(156,156,66,1) 0%,rgba(156,156,66,0.2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9c9c42', endColorstr='#339c9c42',GradientType=1 ); /* IE6-9 */
+    }
+    a,a:visited {
+        color: #ffffff;
+    }
+    &__inner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    &__content {
+        flex: 0 0 calc(100% / 12 * 6);
+        @media (max-width: $md2 + px) {
+            flex: 0 0 calc(100% / 12 * 12);
+        }
+    }
+
+    &__title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        line-height: 1.1;
+    }
+
+    &__sub-title {
+        font-size: 1.125rem;
+        margin-bottom: 39px;
+        line-height: 1.5;
+    }
+
+    &__btn {
+        a { 
+            display: inline-block;
+            padding: 16px 25px;
+            border: 1px solid #ffffff;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.about {
+    background-image: url('../img/about-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: cover;
+   
+
+
+    &__inner {
+        display: flex;
+    }
+
+    &__content {
+        flex: 0 0 calc(100% / 12 * 6);
+        @media (max-width: $md3 + px) {
+            flex: 0 0 calc(100% / 12 * 12);
+        }
+    }
+
+    &__title {
+        margin-bottom: 40px;
+    }
+
+    &__text {
+        margin-bottom: 50px;
+        @media (max-width: $md3 + px) {
+            text-align: center;
+        }
+    }
+
+    &__btn-wrap {
+        display: flex;
+        @media (max-width: $md3 + px) {
+            justify-content: center;
+        }
+    }
+}

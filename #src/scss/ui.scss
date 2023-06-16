@@ -1,0 +1,179 @@
+// ----- Бургер --------------------------------------- 
+$burger_color: #333333;
+    
+.burger {
+        flex: 0 0 auto;
+        @media (min-width: $md2 + px){
+            display: none;
+        }
+        display: block;
+        position: relative;
+        height: 25px;
+        width: 35px;
+        z-index: 56;
+
+        //Линии бургера (общие)
+        span {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: $burger_color;
+        }
+
+        // Линии бургера по отдельности
+        span:nth-child(1) {
+            top: 0%;
+            transform: rotate(0deg);
+            transition: transform $transition, 
+                        top $transition_delay;
+        }
+        span:nth-child(2) {
+            top: calc(50% + 1px);
+            transform: translateY(-2px);
+            opacity: 1;
+            transition: opacity $transition_delay;
+        }
+        span:nth-child(3) {
+            top: 100%;
+            transform: rotate(0deg) translateY(-100%);
+            transition: transform $transition, 
+                        top $transition_delay;
+        }
+}
+// Активный бургер
+.burger_active {
+        span:nth-child(1) {
+            top: 50%;
+            transform: rotate(45deg);
+            transition: top $transition, 
+                        transform $transition_delay;
+        }
+        span:nth-child(2) {
+            top: 50%;
+            opacity: 0;
+            transition: opacity $transition;
+        }
+        span:nth-child(3) {
+            top: 50%;
+            transform: rotate(-45deg);
+            transition: top $transition, transform $transition_delay;
+        }
+}
+// ----- / Burger ----------------------------------------------------
+
+.resp-image {
+    position: relative;
+    &__wrap {
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;     
+        img {
+            height: 100%;
+            width: 100%;  
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+
+.block {
+    overflow: hidden;
+    &__inner {
+        padding: 100px 0;
+    }
+    &__title {
+        font-weight: 900;
+        font-size: 2.25rem;
+        text-transform: uppercase;
+        @media (max-width: $md3 + px) {
+            text-align: center;
+        }
+    }
+    &__text-color {
+        color: $theme_color_1;
+        a, a:visited {
+            color: $theme_color_1;
+        }
+    }
+    &__text-small {
+        font-size: 1rem;
+        color: $theme_color_1;
+        text-transform: lowercase;
+        a, a:visited {
+            color: $theme_color_1;
+            transition:  letter-spacing $transition;
+        }
+        a:hover {
+            letter-spacing: 1.5px;
+            transition:  letter-spacing $transition;
+        }
+    }
+}
+
+
+a.btn,
+a:visited.btn {
+    display: inline-flex;
+    font-size: 1.125rem;
+    color: $theme_color_1;
+    border-radius: 10px;
+    line-height: 0.8;
+    span {
+        display: flex;
+        align-items: center;
+    }
+
+    &_clear {
+        padding: 10px 25px;
+        border: 1px solid $theme_color_1;
+        transition: background-color $transition;
+        img {
+            height: 29px;
+            width: 29px;
+            object-fit: contain;
+            object-position: center;
+            margin-right: 10px;
+        }
+    }
+
+    &_clear:hover {
+        background-color: $theme_color_half;
+        transition: background-color $transition;
+    }
+
+    &_full {
+        color: #ffffff;
+        background-color: $theme_color_1;
+        padding: 15px 26px;
+        align-items: center;
+        transition: background-color $transition;
+        span {
+        }
+        picture {
+            display: flex;
+            align-items: center;
+        }
+        img {
+            width: 20px;
+            height: 16px;
+            object-fit: contain;
+            margin-left: 10px;
+        }
+    }
+    &_full:hover {
+        background-color: $theme_color_1_dark;
+        transition: background-color $transition;
+    }
+}
+
+
+.anim-zoom {
+    transform: scale(1.0);
+    transition: transform $transition;
+}
+.anim-zoom:hover {
+    transform: scale(1.05);
+    transition: transform $transition;
+}

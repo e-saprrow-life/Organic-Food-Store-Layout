@@ -1,0 +1,202 @@
+.header {
+    background-color: #ffffff;
+    position: relative;
+    @media (max-width: $md2 + px) {
+        position: fixed;
+        width: 100%;
+
+    }
+    z-index: 50;
+    &::before {
+        content: '';
+        display: block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #ffffff;
+        z-index: 55;
+    }
+
+    &__inner {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        @media (min-width: $md2 + px) {
+            z-index: 55;
+        }
+    }
+
+// Оболочка лого
+    &__logo {
+        flex: 0 0 calc(100% / 12 * 3);
+        min-height: 100%;
+        position: relative;
+        z-index: 61;
+    }
+
+    &__logo-wrap {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 210px;
+        width: 210px;
+        box-shadow: 0px 0px 15px 1px $theme_shadow_color;
+        
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        @media (max-width: $md2 + px) {
+            height: 100%;
+            width: 100%;
+            box-shadow: none;
+        }
+    }
+
+// Оболочка меню
+    &__menu-wrap {
+        flex: 1 1 calc(100% / 12 * 6);
+        margin: 39px 0;
+        @media (max-width: $md2 + px) {
+            position: fixed;
+            top: 0;
+            left: -120%;
+            height: 100%;
+            width: 0;
+            max-width: 450px;
+            background-color: #bdbdbde7;
+            margin: 0 0;
+            box-shadow: 0px 0px 15px 1px $theme_shadow_color;
+            transition: left $transition, width $transition;
+            z-index: 53;
+            &_active {
+                left: 0;
+                width: 100%;
+                transition: left $transition, width $transition;
+            }
+        }
+    }
+    &__menu {
+        display: flex;
+        justify-content: space-between;
+        @media (max-width: $md2 + px) {
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            overflow: scroll;
+        }
+        
+    }
+    &__menu-list {
+        display: flex;
+        @media (max-width: $md2 + px) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-height: 100%;
+            width: 100%;
+            padding: 80px 0 30px 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &__menu-item {
+        margin: 0 20px;
+        font-size: 1.125rem;
+        display: flex;
+        align-items: center;
+        a {
+            text-shadow: 0px 3px 5px $theme_shadow_color;
+            transition: transform $transition, text-shadow $transition;
+        }
+        @media (min-width: $md2 + px) { 
+            a:hover {
+                transform: scale(1.05);
+                text-shadow: 0px 6px 6px $theme_shadow_color;
+                transition: transform $transition, text-shadow $transition;
+            }
+        }
+        @media (max-width: $md2 + px) {
+            a { padding: 15px 30px;}
+        }
+    }
+
+    &__buttons {
+        flex: 1 1 calc(100% / 12 * 3);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        @media (max-width: $md2 + px) {
+            flex: 0 0 auto;
+            justify-content: center;
+            position: relative;
+            z-index: 55;
+        }
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        border-right: 1px solid $font_color;
+        &_clear {
+            border-right: none;
+        }
+        img {
+            height: 29px;
+            width: 29px;
+            object-fit: contain;
+        }
+        @media (max-width: $md4 + px) {
+            padding: 0 15px;
+            img {
+                height: 25px;
+                width: 25px;
+                object-fit: contain;
+            }
+        }
+    }
+    
+
+    &__btn-login {
+        a,a:visited {
+            font-size: 1.125rem;
+            padding: 11px 30.3px;;
+            border-radius: 10px;
+            border: 1px solid $theme_color_1;
+            color: $theme_color_1;
+            line-height: 1.5;
+            @media (max-width: $md4 + px) {
+                padding: 0;
+                border: none;
+            }
+        }
+        @media (max-width: $md2 + px) {
+            margin-right: 20px;
+        }
+        @media (max-width: $md4 + px) {
+
+            margin-right: 15px;
+        }
+    }
+// Бургер оболочка 
+    &__burger-wrap {
+        @media (max-width: $md2 + px) {
+            flex: 0 0 calc(100% / 12 * 1);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+    }
+}
